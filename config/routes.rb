@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+  get 'accounts/new'
+  resources :accounts
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
+  resources :species
+  resources :families
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
+  delete '/logout',  to: 'sessions#destroy'
+  get    '/signup',  to: 'accounts#new'
+
 
   get 'species' => 'species#index'
   get 'trails' => 'trails#index'

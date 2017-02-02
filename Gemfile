@@ -13,7 +13,6 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 # Use the json-schema gem for validating imported json
 gem 'json-schema'
-
 # Color output from puts for logging
 gem 'colorize'
 
@@ -92,3 +91,5 @@ gem 'rails-assets-markdown'
 gem 'rails-assets-share-button'
 # Photoswipe for mobile friendly image gallery
 gem 'rails-assets-photoswipe'
+
+gem 'will_paginate', '3.1.5'

@@ -1,0 +1,42 @@
+<%= form_for(setup_species(species)) do |f| %>
+  <% if @species.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@species.errors.count, "error") %> prohibited
+        this species from being saved:
+      </h2>
+
+      <ul>
+      <% @species.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :genusSpecies %>
+    <%= f.text_field :genusSpecies %>
+  </div>
+
+  <div>
+    <%= f.label :commonName %>
+    <%= f.text_field :commonName %>
+  </div>
+
+  <div>
+    <%= f.label :indigenousName %>
+    <%= f.text_field :indigenousName %>
+  </div>
+
+  <%= f.fields_for :species_locations do |ff| %>
+    <div>
+      <%= ff.label :lat %>
+      <%= ff.text_field :lat %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
