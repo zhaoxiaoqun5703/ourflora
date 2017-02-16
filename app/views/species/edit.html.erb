@@ -63,16 +63,57 @@ li.accounts {
 <% end %>
 
 <%= form_for(@species) do |f| %>
-  <p>
-    <%= f.label :GenusSpecies %><br>
-    <%= f.text_field :genusSpecies %>
-  </p>
+<div>
+  <%= f.label :genusSpecies %>
+  <%= f.text_field :genusSpecies %>
+</div>
 
-  <p>
-    <%= f.label :Phylogeny %><br>
-    <%= f.text_field :genusSpecies %>
-  </p>
-  <p>
+<div>
+  <%= f.label :commonName %>
+  <%= f.text_field :commonName %>
+</div>
+
+<div>
+  <%= f.label :indigenousName %>
+  <%= f.text_field :indigenousName %>
+</div>
+
+<%= f.collection_select(:family_id, Family.all, :id, :name) %>
+
+<%= f.fields_for :images do |fff| %>
+  <div>
+    <%= fff.label :image %>
+    <%= fff.file_field :image %>
+  </div>
+
+  <div>
+    <%= fff.label :genusSpecies %>
+    <%= fff.text_field :genusSpecies %>
+  </div>
+
+<% end %>
+
+<%= f.fields_for :species_locations do |ff| %>
+  <div>
+    <%= ff.label :latitude %>
+    <%= ff.number_field :lat, class: :text_field, step: :any %>
+  </div>
+
+  <div>
+    <%= ff.label :longitude %>
+    <%= ff.number_field :lon, class: :text_field, step: :any %>
+  </div>
+
+  <div>
+    <%= ff.label :arborplan_id %>
+    <%= ff.text_field :arborplan_id%>
+  </div>
+
+  <div>
+    <%= ff.label :Information %>
+    <%= ff.text_area :information %>
+  </div>
+  <% end %>
     <%= f.submit "Save changes"%>
   </p>
 <% end %>

@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>SpeciesLocation:</b>
+  <%= @contract.species_location.lat.to_s + ' ' + @contract.species_location.lon.to_s%>
+</p>
+
+<p>
+  <b>Trail:</b>
+  <%= @contract.trail.name %>
+</p>

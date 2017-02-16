@@ -1,6 +1,6 @@
 class Trail < ActiveRecord::Base
   extend FriendlyId
-  
+
   has_many :species_location_trails
   has_many :species_locations, through: :species_location_trails, :class_name => 'SpeciesLocation'
 

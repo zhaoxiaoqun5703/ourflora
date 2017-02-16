@@ -1,5 +1,30 @@
 class TrailsController < ApplicationController
   before_action :set_trail, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:new, :destroy]
+
+  def new
+    @trail = Trails.new
+  end
+
+  def create
+    @trail = Trails.new(trail_params)
+    if @trail.save
+      redirect_to trails_index_path
+    else
+      render :action => 'new'
+    end
+
+  end
+
+  def destroy
+    @trail = Trails.find(params[:id])
+    @trail.destroy
+    flash[:success] = "Trail deleted"
+    redirect_to trails_index_path
+
+  end
+
+
 
   # GET /trails
   # GET /trails.json

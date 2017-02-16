@@ -59,6 +59,8 @@ li.accounts {
   <% @sps.each do |sp| %>
     <li>
       <%= link_to sp.genusSpecies, species_path(sp)%>
+      | <%= link_to "edit", edit_species_path(sp) %>
+      | <%= link_to "delete", sp, method: :delete, data: { confirm: "You sure?" } %>
     </li>
   <% end %>
 </ul>

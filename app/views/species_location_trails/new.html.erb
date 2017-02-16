@@ -1,0 +1,23 @@
+<%= form_for(@contract) do |f| %>
+  <% if @contract.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contract.errors.count, "error") %> prohibited this contract from being saved:</h2>
+
+      <ul>
+      <% @contract.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.select :species_location_id, SpeciesLocation.all.collect { |p| [ p.lat.to_s + ' ' + p.lon.to_s, p.id ] } %>
+  </div>
+  <div class="field">
+    <%= f.select :trail_id, Trail.all.collect { |p| [ p.name, p.id ] } %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

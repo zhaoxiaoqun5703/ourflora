@@ -8,7 +8,6 @@ class Species < ActiveRecord::Base
 
   belongs_to :family
   has_many :species_locations
-
   has_many :images
 
   accepts_nested_attributes_for :family

@@ -1,6 +1,6 @@
 class SpeciesController < ApplicationController
   before_action :set_species, only: [:show]
-
+  before_action :logged_in_user, only: [:new, :show, :edit, :update, :destroy]
   # GET /species
   # GET /species.json
 
@@ -49,27 +49,38 @@ class SpeciesController < ApplicationController
   end
 
   def show
-    @species = Species.find(params[:id])
+    @species = Species.friendly.find(params[:id])
   end
 
   def new
     @species = Species.new
     @species.species_locations.build
+    @species.images.build
   end
 
   def create
     @species = Species.new(species_params)
     if @species.save
       flash[:success] = "Species created"
-      render :action => 'new'
+      redirect_to @species
     else
       render :action => 'new'
     end
   end
 
+  def destroy
+    #remove associated images and species_locations before destorying the species object itself
+      @species = Species.friendly.find(params[:id])
+      @species.species_locations.clear
+      @species.images.clear
+      @species.destroy
+      flash[:success] = "Species deleted"
+      redirect_to species_index_path
+  end
+
 
   def edit
-      @species = Species.find(params[:id])
+      @species = Species.friendly.find(params[:id])
   end
 
   def update
@@ -91,6 +102,13 @@ class SpeciesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def species_params
-      params.require(:species).permit(:genusSpecies, :commonName, :indigenousName, :species_locations_attributes => [:lat, :lon, :information, :arborplan_id])
+      params.require(:species).permit(:family_id, :genusSpecies, :commonName, :indigenousName, :species_locations_attributes => [:lat, :lon, :information, :arborplan_id], :images_attributes => [:genusSpecies, :image])
+    end
+
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
     end
 end

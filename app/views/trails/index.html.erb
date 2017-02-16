@@ -40,47 +40,26 @@ li.accounts {
   <% if logged_in? %>
     <li id="headerLi"><%= link_to "Accounts", accounts_path %></li>
     <li id="headerLi"><%= link_to "Families", families_path %></li>
+    <li id="headerLi"><%= link_to "Species", species_index_path %></li>
     <li id="headerLi"><%= link_to "Log out", logout_path, method: "delete" %></li>
   <% else %>
     <li id="headerLi"><%= link_to "Log in", login_path %></li>
   <% end %>
 </ul>
 
-<% if flash[:success] %>
-    <div class="success"><%= flash[:success] %></div>
-<% end %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <p> GenusSpecies: </p>
-        <%= @species.genusSpecies %>
-      </h1>
-      <h2>
-        <p> CommonName: </p>
-        <%= @species.commonName %>
-      </h2>
-      <h2>
-        <p> IndigenousName: </p>
-        <%= @species.indigenousName %>
-      </h2>
-    </section>
-  </aside>
-</div>
+<% provide(:title, 'All users') %>
+<h1>All trails</h1>
+<%= link_to "Create new trail", new_trail_path %>
 
-<div class = "row">
-  <% @species.images.each do |img| %>
-  <div class="media">
-    <div class="media-left">
-      <%= link_to image_tag(img.image.url, class: 'media-object'), img.image.url, target: '_blank' %>
-    </div>
-    <div class="media-body">
-      <h4 class="media-heading"><%= img.id %></h4>
-    </div>
-  </div>
+<%= will_paginate @trails %>
+
+
+<ul>
+  <% @trails.each do |trail| %>
+    <li>
+      <%= trail.name %>
+      | <%= link_to "edit", edit_trail_path(trail) %>
+      | <%= link_to "delete", trail, method: :delete, data: { confirm: "You sure?" } %>
+    </li>
   <% end %>
-
-
-
-
-</div>
+</ul>

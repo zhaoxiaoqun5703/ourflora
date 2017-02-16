@@ -1,0 +1,25 @@
+<h1>Listing contracts</h1>
+
+<table>
+  <tr>
+    <th>Species Location</th>
+    <th>Trail</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @contracts.each do |contract| %>
+  <tr>
+    <td><%= contract.species_location_id %></td>
+    <td><%= contract.trail_id %></td>
+    <td><%= link_to 'Show', species_location_trail_path(contract) %></td>
+    <td><%= link_to 'Edit', edit_species_location_trail_path(contract) %></td>
+    <td><%= link_to 'Destroy', contract, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New contract', new_species_location_trail_path %>

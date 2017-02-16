@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'species_location/create'
+
+  get 'species_location_trails/index'
+
   get 'sessions/new'
   get 'accounts/new'
   resources :accounts
@@ -7,6 +11,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :species
   resources :families
+  resources :images
+  resources :trails
+  resources :species_location_trails
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
