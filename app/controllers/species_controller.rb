@@ -91,8 +91,8 @@ class SpeciesController < ApplicationController
   end
 
   def update
-    @species = Species.find(params[:id])
-    if @species.update(params[:species])
+    @species = Species.friendly.find(params[:id])
+    if @species.update(species_params)
       # Handle a successful update.
       flash[:success] = "Species updated"
       redirect_to @species
