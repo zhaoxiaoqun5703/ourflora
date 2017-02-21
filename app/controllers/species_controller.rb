@@ -5,7 +5,7 @@ class SpeciesController < ApplicationController
   # GET /species.json
 
 
-
+  #This class has also the CRUD actions.
   def index
     @species = Species.eager_load(:family, :species_locations, :images).order('families.name')
     respond_to do |format|
@@ -52,10 +52,17 @@ class SpeciesController < ApplicationController
     @species = Species.friendly.find(params[:id])
   end
 
+
+  #the new species is now created by one image and one coordinate, if more needed to be created,
+  #change the number accordingly.
   def new
     @species = Species.new
-    @species.species_locations.build
-    @species.images.build
+    for i in 0..0
+      @species.species_locations.build
+    end
+    for i in 0..0
+      @species.images.build
+    end
   end
 
   def create

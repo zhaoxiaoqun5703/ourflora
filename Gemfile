@@ -91,3 +91,5 @@ gem 'rails-assets-markdown'
 gem 'rails-assets-share-button'
 # Photoswipe for mobile friendly image gallery
 gem 'rails-assets-photoswipe'
+
+gem 'will_paginate'

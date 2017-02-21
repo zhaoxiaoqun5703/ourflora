@@ -2,22 +2,26 @@ class TrailsController < ApplicationController
   before_action :set_trail, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user, only: [:new, :destroy]
 
+
+  #for the create action
   def new
-    @trail = Trails.new
+    @trail = Trail.new
   end
 
+  #redirect the user to the 'contract' after creating a new trail
   def create
-    @trail = Trails.new(trail_params)
+    @trail = Trail.new(trail_params)
     if @trail.save
-      redirect_to trails_index_path
+      redirect_to species_location_trails_index_path
     else
       render :action => 'new'
     end
 
   end
 
+  #for destroying a trail entry
   def destroy
-    @trail = Trails.find(params[:id])
+    @trail = Trail.find(params[:id])
     @trail.destroy
     flash[:success] = "Trail deleted"
     redirect_to trails_index_path
@@ -73,8 +77,16 @@ class TrailsController < ApplicationController
       @trail_selected = Trail.friendly.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters from the scary internet, only alow the white list through.
+    # the allowed parameters are set to be: name and information, change it if suitable
     def trail_params
-      params[:trail]
+      params.require(:trail).permit(:name, :information)
+    end
+
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
     end
 end

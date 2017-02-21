@@ -3,6 +3,7 @@ class FamiliesController < ApplicationController
 
   # GET /families
   # GET /families.json
+  # CRUD actions are built for this model
   def index
     @families = Family.page(params[:page])
   end

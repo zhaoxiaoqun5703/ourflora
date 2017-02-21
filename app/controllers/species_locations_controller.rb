@@ -1,20 +1,27 @@
-class SpeciesLocationController < ApplicationController
+class SpeciesLocationsController < ApplicationController
   before_action :logged_in_user, only: [:new, :show, :edit, :update, :destroy]
+
+  #for showing all species coordinates
+  def index
+    @locations = SpeciesLocation.all
+  end
 
   def new
     @location = SpeciesLocation.new
   end
 
+  #for creating new species coordinate entry
   def create
     @location = SpeciesLocation.new(location_params)
     if @location.save
-      redirect_to species_locations_index_path
+      redirect_to species_location_trails_index_path
     else
       render :action => 'new'
     end
 
   end
 
+  #for deleteing an existing entry
   def destroy
     @location = SpeciesLocation.find(params[:id])
     @location.destroy
@@ -24,9 +31,9 @@ class SpeciesLocationController < ApplicationController
   end
 
   private
-
+    #species_location has important fields: lat, lon, and information, just include these for creating a new species_location entry
     def location_params
-      params.require(:species_location_trail).permit(:trail_id, :species_location_id, :species_id, :information, :arborplan_id)
+      params.require(:species_location).permit(:lat, :lon, :information, :arborplan_id)
     end
 
     def logged_in_user
@@ -36,4 +43,4 @@ class SpeciesLocationController < ApplicationController
       end
     end
 
-end
+  end

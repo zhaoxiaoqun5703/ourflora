@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
-  get 'species_location/create'
-
   get 'species_location_trails/index'
 
-  get 'sessions/new'
-  get 'accounts/new'
   resources :accounts
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -14,6 +10,7 @@ Rails.application.routes.draw do
   resources :images
   resources :trails
   resources :species_location_trails
+  resources :species_locations
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'

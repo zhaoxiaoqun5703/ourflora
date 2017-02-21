@@ -1,7 +1,8 @@
 class SpeciesLocationTrailsController < ApplicationController
   before_action :logged_in_user, only: [:new, :show, :edit, :update, :destroy]
 
-
+  #this class serves as a 'contract' between trail and species location(coordinate)
+  #This controller has also the abilities for CRUD actions
   def index
     @contracts = SpeciesLocationTrail.all
   end

@@ -1,0 +1,43 @@
+<%= form_for(@location) do |f| %>
+  <% if @location.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@location.errors.count, "error") %> prohibited
+        this species from being saved:
+      </h2>
+
+      <ul>
+      <% @location.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if flash[:success] %>
+    <div class="notice"><%= flash[:success] %></div>
+  <% end %>
+
+  <div>
+    <%= f.label :latitude %>
+    <%= f.number_field :lat, class: :text_field, step: :any %>
+  </div>
+
+  <div>
+    <%= f.label :longitude %>
+    <%= f.number_field :lon, class: :text_field, step: :any %>
+  </div>
+
+  <div>
+    <%= f.label :arborplan_id %>
+    <%= f.text_field :arborplan_id%>
+  </div>
+
+  <div>
+    <%= f.label :Information %>
+    <%= f.text_area :information %>
+  </div>
+
+  <p><%= f.submit "Submit" %></p>
+
+<% end %>

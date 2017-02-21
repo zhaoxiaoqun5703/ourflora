@@ -1,6 +1,8 @@
 class AccountsController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update]
-  
+
+  #account is the model that holds all details about an admin user
+  #CRUD actions are created for this model
   def index
     @accounts = Account.all
   end
