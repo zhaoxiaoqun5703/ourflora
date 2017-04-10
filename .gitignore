@@ -11,8 +11,6 @@ capybara-*.html
 # Ignore figaro application.yml
 /config/application.yml
 
-.DS_Store
-
 tmp/*
 
 /public/assets
